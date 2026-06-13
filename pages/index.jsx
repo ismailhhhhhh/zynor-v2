@@ -12,35 +12,40 @@ if (typeof window === 'undefined') {
 // ═══════════════════════════════════════════════════════
 async function askGemini(prompt, apiKey, isJson = false) {
   if (!apiKey || apiKey.trim() === "") {
-    throw new Error("يرجى إدخال مفتاح Gemini API في قسم الإعدادات ⚙️ لتشغيل الأداة.");
+    throw new Error("يرجى إدخال مفتاح Gemini API لتشغيل الأداة في قسم الإعدادات ⚙️");
   }
-  
+
   const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + apiKey;
+
   const payload = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: {
-      temperature: 0.7,
-      maxOutputTokens: 2000,
-    }
+    generationConfig: {}
   };
 
-  // إذا كنا نحتاج JSON (مثل رادار المقاومة أو خريطة الـ SEO)
   if (isJson) {
     payload.generationConfig.responseMimeType = "application/json";
   }
 
   const response = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
   });
 
-  const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.error?.message || `خطأ في الاتصال: ${response.status}`);
+    throw new Error(`خطأ من السيرفر: ${response.status}`);
   }
-  
-  return data.candidates[0].content.parts[0].text || "";
+
+  const data = await response.json();
+
+  // هنا طريقة القراءة الصحيحة الخاصة بـ Gemini لمنع التوقف
+  try {
+    return data.candidates[0].content.parts[0].text;
+  } catch (error) {
+    throw new Error("فشل في قراءة استجابة نموذج Gemini المتوقعة.");
+  }
 }
 
 // ═══════════════════════════════════════════════════════
