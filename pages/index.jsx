@@ -10,41 +10,42 @@ if (typeof window === 'undefined') {
 // ═══════════════════════════════════════════════════════
 //  GEMINI API (المحرك الجديد المجاني)
 // ═══════════════════════════════════════════════════════
-async function askGemini(prompt, apiKey, isJson = false) {
+async function askGemini(prompt, apiKey) {
   if (!apiKey || apiKey.trim() === "") {
-    throw new Error("يرجى إدخال مفتاح Gemini API لتشغيل الأداة في قسم الإعدادات ⚙️");
+    throw new Error("يرجى إدخال مفتاح API الخاص بـ Gemini أولاً.");
   }
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + apiKey;
+  // تم تحديث اسم النموذج هنا إلى النسخة الأحدث المدعومة مجانًا gemini-3.5-flash
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=' + apiKey.trim();
 
   const payload = {
     contents: [{ parts: [{ text: prompt }] }],
     generationConfig: {}
   };
 
-  if (isJson) {
-    payload.generationConfig.responseMimeType = "application/json";
-  }
-
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  });
-
-  if (!response.ok) {
-    throw new Error(`خطأ من السيرفر: ${response.status}`);
-  }
-
-  const data = await response.json();
-
-  // هنا طريقة القراءة الصحيحة الخاصة بـ Gemini لمنع التوقف
   try {
-    return data.candidates[0].content.parts[0].text;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`خطأ من السيرفر: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    if (data.candidates && data.candidates.length > 0) {
+      return data.candidates[0].content.parts[0].text;
+    } else {
+      throw new Error("لم يتم العثور على إجابة في الرد.");
+    }
   } catch (error) {
-    throw new Error("فشل في قراءة استجابة نموذج Gemini المتوقعة.");
+    console.error("Gemini API Error:", error);
+    throw error;
   }
 }
 
