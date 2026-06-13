@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Zap, FileText, Megaphone, Share2, History, Settings, Shield, Eye, EyeOff, Target, Brain, Sword, Moon, Copy, RefreshCw, TrendingUp, AlertTriangle, CheckCircle, Users, Download, Search, BarChart2, Crosshair, ChevronRight, Star, Lock, Unlock, Coffee, Key } from "lucide-react";
-
+if (typeof window === 'undefined') {
+  global.localStorage = {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {}
+  };
+}
 // ═══════════════════════════════════════════════════════
 //  GEMINI API (المحرك الجديد المجاني)
 // ═══════════════════════════════════════════════════════
