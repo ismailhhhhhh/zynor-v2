@@ -15,7 +15,7 @@ async function askGemini(prompt, apiKey, isJson = false) {
     throw new Error("يرجى إدخال مفتاح Gemini API في قسم الإعدادات ⚙️ لتشغيل الأداة.");
   }
   
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + apiKey;
   const payload = {
     contents: [{ parts: [{ text: prompt }] }],
     generationConfig: {
