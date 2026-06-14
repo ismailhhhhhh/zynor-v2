@@ -150,6 +150,75 @@ export default function App() {
 
   return (
     <div style={S.app}>
+      return (
+    <div style={S.app}>
+      
+      {/* 🌟 سحر التصميم المستقبلي يبدأ هنا 🌟 */}
+      <style>{`
+        body {
+          background: #09090e !important;
+          color: #f3f4f6 !important;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+          overflow-x: hidden;
+          position: relative;
+        }
+
+        body::before, body::after {
+          content: "";
+          position: fixed;
+          width: 350px;
+          height: 350px;
+          border-radius: 50%;
+          filter: blur(140px);
+          z-index: -1;
+          opacity: 0.45;
+          animation: siriGlow 12s infinite alternate ease-in-out;
+          pointer-events: none;
+        }
+
+        body::before { background: radial-gradient(circle, #6366f1, #a855f7); top: -10%; left: -10%; }
+        body::after { background: radial-gradient(circle, #ec4899, #3b82f6); bottom: -10%; right: -10%; animation-delay: 6s; }
+
+        @keyframes siriGlow {
+          0% { transform: translate(0, 0) scale(1); }
+          100% { transform: translate(60px, 40px) scale(1.2); }
+        }
+
+        .glass-card, div[style*="background"], textarea, input {
+          background: rgba(255, 255, 255, 0.03) !important;
+          backdrop-filter: blur(20px) saturate(140%) !important;
+          -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+          border: 1px solid rgba(255, 255, 255, 0.09) !important;
+          border-radius: 20px !important;
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease !important;
+        }
+
+        div[style*="background"]:hover, textarea:hover {
+          transform: translateY(-2px);
+          border-color: rgba(99, 102, 241, 0.35) !important;
+          box-shadow: 0 40px 80px rgba(99, 102, 241, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+        }
+
+        button {
+          background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+          color: #ffffff !important;
+          border: none !important;
+          border-radius: 16px !important;
+          font-weight: 600 !important;
+          box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3) !important;
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        }
+
+        button:hover {
+          transform: translateY(-2px) scale(1.02) !important;
+          box-shadow: 0 12px 30px rgba(168, 85, 247, 0.45) !important;
+        }
+      `}</style>
+      {/* 🌟 نهاية كود التصميم 🌟 */}
+
+      {toast && (
+        <div style={{ position:"fixed", bottom:20, left:20 /*...بقيت الأكواد كما هي...*/ }}>
       {toast && (
         <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background:T.surface, border:`1px solid ${toast.type==="error"?"#f87171":toast.type==="success"?"#4ade80":T.border}`, borderRadius:10, padding:"10px 18px", fontSize:13, color:toast.type==="error"?"#f87171":toast.type==="success"?"#4ade80":"#e4e4f0", zIndex:9999, pointerEvents:"none", whiteSpace:"nowrap", boxShadow:"0 4px 24px rgba(0,0,0,0.5)" }}>
           {toast.msg}
