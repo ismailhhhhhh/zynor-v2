@@ -150,11 +150,8 @@ export default function App() {
 
   return (
     <div style={S.app}>
-      return (
-    <div style={S.app}>
-      
-      {/* 🌟 سحر التصميم المستقبلي يبدأ هنا 🌟 */}
       <style>{`
+        /* 1. خلفية Zynor المستقبلية بأسلوب Siri */
         body {
           background: #09090e !important;
           color: #f3f4f6 !important;
@@ -180,11 +177,12 @@ export default function App() {
         body::after { background: radial-gradient(circle, #ec4899, #3b82f6); bottom: -10%; right: -10%; animation-delay: 6s; }
 
         @keyframes siriGlow {
-          0% { transform: translate(0, 0) scale(1); }
+          0 { transform: translate(0, 0) scale(1); }
           100% { transform: translate(60px, 40px) scale(1.2); }
         }
 
-        .glass-card, div[style*="background"], textarea, input {
+        /* 2. تحويل الصناديق لتأخذ مظهر الزجاج النقي ثلاثي الأبعاد */
+        div[style*="background"], textarea, input, select {
           background: rgba(255, 255, 255, 0.03) !important;
           backdrop-filter: blur(20px) saturate(140%) !important;
           -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
@@ -194,12 +192,13 @@ export default function App() {
           transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease !important;
         }
 
-        div[style*="background"]:hover, textarea:hover {
-          transform: translateY(-2px);
+        div[style*="background"]:hover {
+          transform: translateY(-3px) scale(1.01);
           border-color: rgba(99, 102, 241, 0.35) !important;
           box-shadow: 0 40px 80px rgba(99, 102, 241, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
         }
 
+        /* 3. تحديث أزرار الأداة لتصبح نيون متوهجة */
         button {
           background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
           color: #ffffff !important;
@@ -215,13 +214,12 @@ export default function App() {
           box-shadow: 0 12px 30px rgba(168, 85, 247, 0.45) !important;
         }
       `}</style>
-      {/* 🌟 نهاية كود التصميم 🌟 */}
 
       {toast && (
-        <div style={{ position:"fixed", bottom:20, left:20 /*...بقيت الأكواد كما هي...*/ }}>
-      {toast && (
-        <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background:T.surface, border:`1px solid ${toast.type==="error"?"#f87171":toast.type==="success"?"#4ade80":T.border}`, borderRadius:10, padding:"10px 18px", fontSize:13, color:toast.type==="error"?"#f87171":toast.type==="success"?"#4ade80":"#e4e4f0", zIndex:9999, pointerEvents:"none", whiteSpace:"nowrap", boxShadow:"0 4px 24px rgba(0,0,0,0.5)" }}>
-          {toast.msg}
+        <div style={{ position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)", zIndex: 9999 }}>
+          <div style={{ background: T.surface, padding: "12px 24px", borderRadius: 12, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}>
+            {toast.msg}
+          </div>
         </div>
       )}
 
