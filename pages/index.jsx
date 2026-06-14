@@ -150,12 +150,15 @@ export default function App() {
 
   return (
     <div style={S.app}>
-      <style>{`
-        /* 1. خلفية Zynor المستقبلية بأسلوب Siri */
+  <style dangerouslySetInnerHTML={{ __html: `
+        /* 1. استدعاء الخطوط العالمية الحية (Cairo & Inter) */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Inter:wght@400;700;900&display=swap');
+
+        /* 2. تطبيق الخطوط والخلفية */
         body {
-          background: #09090e !important;
+          background: #05050a !important;
           color: #f3f4f6 !important;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+          font-family: 'Inter', 'Cairo', system-ui, sans-serif !important;
           overflow-x: hidden;
           position: relative;
         }
@@ -177,17 +180,18 @@ export default function App() {
         body::after { background: radial-gradient(circle, #ec4899, #3b82f6); bottom: -10%; right: -10%; animation-delay: 6s; }
 
         @keyframes siriGlow {
-          0 { transform: translate(0, 0) scale(1); }
+          0% { transform: translate(0, 0) scale(1); }
           100% { transform: translate(60px, 40px) scale(1.2); }
         }
 
-        /* 2. تحويل الصناديق لتأخذ مظهر الزجاج النقي ثلاثي الأبعاد */
+        /* 3. التوزيع الديناميكي للصناديق */
         div[style*="background"], textarea, input, select {
-          background: rgba(255, 255, 255, 0.03) !important;
-          backdrop-filter: blur(20px) saturate(140%) !important;
-          -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
-          border: 1px solid rgba(255, 255, 255, 0.09) !important;
-          border-radius: 20px !important;
+          background: rgba(255, 255, 255, 0.02) !important;
+          backdrop-filter: blur(24px) saturate(150%) !important;
+          -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+          border: 1px solid rgba(255, 255, 255, 0.05) !important;
+          border-radius: 24px !important;
+          padding: 24px !important;
           box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
           transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease !important;
         }
@@ -198,22 +202,32 @@ export default function App() {
           box-shadow: 0 40px 80px rgba(99, 102, 241, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
         }
 
-        /* 3. تحديث أزرار الأداة لتصبح نيون متوهجة */
+        /* 4. قوة العناوين والنصوص */
+        h1, h2, h3, h4, h5, h6, label {
+          font-weight: 800 !important;
+          letter-spacing: -0.5px !important;
+          text-shadow: 0 4px 20px rgba(168, 85, 247, 0.2) !important;
+        }
+
+        /* 5. تحويل الأزرار إلى مجسمات 3D ملموسة */
         button {
           background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
           color: #ffffff !important;
           border: none !important;
           border-radius: 16px !important;
-          font-weight: 600 !important;
-          box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3) !important;
+          font-weight: 800 !important;
+          font-size: 16px !important;
+          padding: 14px 28px !important;
+          box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.3), inset 0 -3px 0 rgba(0, 0, 0, 0.2) !important; 
           transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+          cursor: pointer;
         }
 
         button:hover {
-          transform: translateY(-2px) scale(1.02) !important;
-          box-shadow: 0 12px 30px rgba(168, 85, 247, 0.45) !important;
+          transform: translateY(-4px) scale(1.02) !important;
+          box-shadow: 0 15px 30px rgba(168, 85, 247, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -3px 0 rgba(0, 0, 0, 0.3) !important;
         }
-      `}</style>
+      `}} />
 
       {toast && (
         <div style={{ position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)", zIndex: 9999 }}>
